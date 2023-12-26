@@ -1,0 +1,25 @@
+import random
+import string
+
+nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "inez", "vladimir", "karim", "norma", "mascota", "marcelo",  "maria", "juan", "fernando", "mariana", "pedro", "daniel","luis","michael", "francia","erick","Marcos", "mariafernanda" ,"laura","Dom","Davi","Miguel","Estevao","Breno","Davi","Luiz","Thales","Israel","Arthur","Gael","Heitor","Theo","Davi","Gabriel","Bernardo","Samuel","Joaomiguel"]
+years = range(1900, 2024)
+
+def generar_password():
+    letras_mayusculas = random.choices(string.ascii_uppercase, k=3)
+    letras_minusculas = random.choices(string.ascii_lowercase, k=3)
+    numeros = random.choices(string.digits, k=4)
+    return "".join(letras_mayusculas + letras_minusculas + numeros)
+
+combos = []
+
+for nombre in nombres:
+    for year in years:
+        username = nombre + str(year)
+        password = generar_password()
+        combo = f"{username}:{username}"
+        combos.append(combo)
+
+random.shuffle(combos)
+
+for combo in combos:
+    print(combo)
