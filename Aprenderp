@@ -29,7 +29,6 @@ subprocess.run(["clear", ""])
 import string
 
    
-   user=user+":"+pas
    print(i," = ",user)
    f = open(filename, "a")
    f.write(user)
