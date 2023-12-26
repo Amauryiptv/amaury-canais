@@ -28,19 +28,6 @@ import subprocess
 subprocess.run(["clear", ""])
 import string
 
-
-f = open(filename, "w")
-f.write("")
-f.close()
-
-
-
-i = 1
-
-while i <= n:
-   
-   user = (''.join(random.choice(c) for _ in range(largouser)))
-   pas  = (''.join(random.choice(c) for _ in range(largopass)))
    
    user=user+":"+pas
    print(i," = ",user)
