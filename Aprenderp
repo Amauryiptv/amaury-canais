@@ -28,17 +28,6 @@ import subprocess
 subprocess.run(["clear", ""])
 import string
 
-# Config feita pelo ꧁༒︎fervoroso༒︎꧂ 
-
-	           
-\33[0m\n\nInsira a Quantidade do Combo a Gerar: """))
-print (" ")
-print ("\t\t\33[1;100m (.txt) Escreva o Nome do Combo\33[0m ")
-filename = input("\nNome:  ")
-filename = filename + ".txt"
-print (" ")
-
-
 
 f = open(filename, "w")
 f.write("")
