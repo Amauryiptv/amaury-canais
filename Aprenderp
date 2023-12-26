@@ -1,0 +1,69 @@
+import random
+import string
+
+nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "inez", "vladimir", "karim", "norma", "mascota", "marcelo",  "maria", "juan", "fernando", "mariana", "pedro", "daniel","luis","michael", "francia","erick","Marcos", "mariafernanda" ,"laura","Dom","Davi","Miguel","Estevao","Breno","Davi","Luiz","Thales","Israel","Arthur","Gael","Heitor","Theo","Davi","Gabriel","Bernardo","Samuel","Joaomiguel"]
+years = range(1989, 2024)
+
+def generar_password():
+    letras_mayusculas = random.choices(string.ascii_uppercase, k=3)
+    letras_minusculas = random.choices(string.ascii_lowercase, k=3)
+    numeros = random.choices(string.digits, k=4)
+    return "".join(letras_mayusculas + letras_minusculas + numeros)
+
+combos = []
+
+for nombre in nombres:
+    for year in years:
+        username = nombre + str(year)
+        password = generar_password()
+        combo = f"{username}:{username}"
+        combos.append(combo)
+
+random.shuffle(combos)
+
+for combo in combos:
+    print(combo)
+import random
+import subprocess
+subprocess.run(["clear", ""])
+import string
+
+# Config feita pelo ꧁༒︎fervoroso༒︎꧂ 
+
+	           
+\33[0m\n\nInsira a Quantidade do Combo a Gerar: """))
+print (" ")
+print ("\t\t\33[1;100m (.txt) Escreva o Nome do Combo\33[0m ")
+filename = input("\nNome:  ")
+filename = filename + ".txt"
+print (" ")
+
+
+
+f = open(filename, "w")
+f.write("")
+f.close()
+
+
+
+i = 1
+
+while i <= n:
+   
+   user = (''.join(random.choice(c) for _ in range(largouser)))
+   pas  = (''.join(random.choice(c) for _ in range(largopass)))
+   
+   user=user+":"+pas
+   print(i," = ",user)
+   f = open(filename, "a")
+   f.write(user)
+   f.write("\n")
+   f.close()
+   i += 1
+   
+
+
+print ("\33[1;37;42m")
+print (n," COMBO GERADO COM SUCESSO: ",filename,)
+print ("\33[0m")
+print ("★fervoroso★")
