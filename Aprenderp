@@ -22,7 +22,7 @@ nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "
 "Gabriel","Renato","Jeferson","Carlos","Douglas","Everton",
 "Pedro","Juan","Ney","Breno","Pablo","Cesar","Kaique","Márcia",
 "Fernanda","Lucas","Jorge","Bruno","Gabriela","Renata","Beatriz","mariaclara","Alessandra","Barbara","Moacir","Kleber","Luciano","Silvania","Guilherme","Juliete"]
-years = range(123,123)
+years = range(123,1234)
 
 def generar_password():
     letras_mayusculas = random.choices(string.ascii_uppercase, k=3)
