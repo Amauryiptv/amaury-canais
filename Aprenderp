@@ -1,8 +1,28 @@
 import random
 import string
 
-nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "inez", "vladimir", "karim", "norma", "mascota", "marcelo",  "maria", "juan", "fernando", "mariana", "pedro", "daniel","luis","michael", "francia","erick","Marcos", "mariafernanda" ,"laura","Dom","Davi","Miguel","Estevao","Breno","Davi","Luiz","Thales","Israel","Arthur","Gael","Heitor","Theo","Davi","Gabriel","Bernardo","Samuel","Joaomiguel"]
-years = range(1989, 2024)
+nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "inez", "vladimir", "karim", "norma", "mascota", "marcelo",  "maria", "juan", "fernando", "mariana", "pedro", "daniel","luis","michael", "francia","erick","Marcos", "mariafernanda" ,"laura","Dom","Davi","Miguel","Estevao","Breno""Davi","Luiz","Thales","Israel","Arthur","Gael","Heitor","Theo",
+"Davi","Gabriel","Bernardo","Samuel","Joaomiguel","Miguel",
+"Arthur","Gael","Theo","Heitor","Ravi","Davi","Bernardo","Noah",
+"Gabriel","Samuel","Pedro","Anthony","Isaac","Benício",
+"Benjamin",
+"Matheus","Lucas","Joaquim","Nicolas","Lucca","Lorenzo",
+"Henrque","Joao", "Miguel","Rafael","Henry","Murilo","Levi","Guilherme","Vicente",
+"Felipe","Bryan","Matteo","Bento","Joaopedro","Pietro",
+"Leonardo","Daniel","Gustavo","Pedro","Henrique","Joao", "Lucas","Emanuel","João","Caleb","Davi","Lucca","Antonio",
+"Eduardo","Enrico","Caio","Jose","Enzo", "Gabriel","Augusto","Mathias","Vitor","Enzo","Caua","Francisco",
+"Rael","Joaoguilherme","Thomas","Yuri","Yan","Anthony", "Gabriel","Oliver","Otávio","JoaoGabriel","Nathan",
+"Davilucas","Vinicius","Theodoro","Valentim","RyanLuiz", "Miguel","Arthur","Miguel","Joaovitor","Léonovo","Ravi",
+"Lucca",
+"Apollo","Thiago","Tomás","Martin","Jose","Miguel",
+"Erick","Liam","Josue","Luan","Asafe","Raul","Jose", "Pedro","Dominic","Kaue",
+"Kalel","Luiz","Henrique","Dom","Davimiguel","Estevao","Breno",
+"Daviluiz","Thales","Israel","Mauricio","Marcelo","Luis","Marcos",
+"Fernando","Maria","rose","Maria","Leonardo","Bruno","Gustavo",
+"Gabriel","Renato","Jeferson","Carlos","Douglas","Everton",
+"Pedro","Juan","Ney","Breno","Pablo","Cesar","Kaique","Márcia",
+"Fernanda","Lucas","Jorge","Bruno","Gabriela","Renata","Beatriz","mariaclara","Alessandra","Barbara","Moacir","Kleber","Luciano","Silvania","Guilherme","Juliete"]
+years = range(123,123)
 
 def generar_password():
     letras_mayusculas = random.choices(string.ascii_uppercase, k=3)
@@ -23,14 +43,3 @@ random.shuffle(combos)
 
 for combo in combos:
     print(combo)
-import random
-import subprocess
-subprocess.run(["clear", ""])
-import string
-   
-
-
-print ("\33[1;37;42m")
-print (n," COMBO GERADO COM SUCESSO: ",filename,)
-print ("\33[0m")
-print ("★fervoroso★")
