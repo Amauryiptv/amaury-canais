@@ -1,0 +1,45 @@
+import random
+import string
+
+nombres = ["carlos", "jose", "victoria", "carla", "manuel", "fredy", "carmen", "inez", "vladimir", "karim", "norma", "mascota", "marcelo",  "maria", "juan", "fernando", "mariana", "pedro", "daniel","luis","michael", "francia","erick","Marcos", "mariafernanda" ,"laura","Dom","Davi","Miguel","Estevao","Breno""Davi","Luiz","Thales","Israel","Arthur","Gael","Heitor","Theo",
+"Davi","Gabriel","Bernardo","Samuel","Joaomiguel","Miguel",
+"Arthur","Gael","Theo","Heitor","Ravi","Davi","Bernardo","Noah",
+"Gabriel","Samuel","Pedro","Anthony","Isaac","Benício",
+"Benjamin",
+"Matheus","Lucas","Joaquim","Nicolas","Lucca","Lorenzo",
+"Henrque","Joao", "Miguel","Rafael","Henry","Murilo","Levi","Guilherme","Vicente",
+"Felipe","Bryan","Matteo","Bento","Joaopedro","Pietro",
+"Leonardo","Daniel","Gustavo","Pedro","Henrique","Joao", "Lucas","Emanuel","João","Caleb","Davi","Lucca","Antonio",
+"Eduardo","Enrico","Caio","Jose","Enzo", "Gabriel","Augusto","Mathias","Vitor","Enzo","Caua","Francisco",
+"Rael","Joaoguilherme","Thomas","Yuri","Yan","Anthony", "Gabriel","Oliver","Otávio","JoaoGabriel","Nathan",
+"Davilucas","Vinicius","Theodoro","Valentim","RyanLuiz", "Miguel","Arthur","Miguel","Joaovitor","Léonovo","Ravi",
+"Lucca",
+"Apollo","Thiago","Tomás","Martin","Jose","Miguel",
+"Erick","Liam","Josue","Luan","Asafe","Raul","Jose", "Pedro","Dominic","Kaue",
+"Kalel","Luiz","Henrique","Dom","Davimiguel","Estevao","Breno",
+"Daviluiz","Thales","Israel","Mauricio","Marcelo","Luis","Marcos",
+"Fernando","Maria","rose","Maria","Leonardo","Bruno","Gustavo",
+"Gabriel","Renato","Jeferson","Carlos","Douglas","Everton",
+"Pedro","Juan","Ney","Breno","Pablo","Cesar","Kaique","Márcia",
+"Fernanda","Lucas","Jorge","Bruno","Gabriela","Renata","Beatriz","mariaclara","Alessandra","Barbara","Moacir","Kleber","Luciano","Silvania","Guilherme","Juliete"]
+Numbers= range(1, 6)
+
+def generar_password():
+    letras_mayusculas = random.choices(string.ascii_uppercase, k=3)
+    letras_minusculas = random.choices(string.ascii_lowercase, k=3)
+    numeros = random.choices(string.digits, k=4)
+    return "".join(letras_mayusculas + letras_minusculas + numeros)
+
+combos = []
+
+for nombre in nombres:
+    for numbers in numbers:
+        username = nombre + str(numbers)
+        password = generar_password()
+        combo = f"{username}:{username}"
+        combos.append(combo)
+
+random.shuffle(combos)
+
+for combo in combos:
+    print(combo)
