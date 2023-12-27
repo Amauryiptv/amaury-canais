@@ -33,7 +33,7 @@ def generar_password():
 combos = []
 
 for nombre in nombres:
-    for numbers in numbers:
+    for number in numbers:
         username = nombre + str(numbers)
         password = generar_password()
         combo = f"{username}:{username}"
