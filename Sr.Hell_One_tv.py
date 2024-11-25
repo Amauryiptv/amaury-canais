@@ -38,7 +38,7 @@ def update_terminal_title(new_title):
     sys.stdout.write(f"\033]2;{new_title}\007")
     sys.stdout.flush()
 
-NAME = "[Hell] OneTV_Py"
+NAME = "[Hell] Versatplay_Py"
 update_terminal_title(NAME)
 
 def get_terminal_size():
@@ -50,7 +50,7 @@ def get_terminal_size():
 def create_ascii_art():
     ascii_art = """
 <code base/>
-<atk painel onetv/>
+<atk painel versatplay/>
 •••••••••</>•••••••••
 <algoritm by Sr. Hell/>
     """
@@ -60,7 +60,7 @@ def center_text(text, width):
     return "\n".join(line.center(width) for line in text.splitlines())
 
 def login_and_get_dashboard(username, password):
-    login_url = 'https://onetv.cmsi.site/sys/api.php'
+    login_url = 'https://versatplay.cmzi.top/sys/api.php'
     login_headers = {
         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'
@@ -79,7 +79,7 @@ def login_and_get_dashboard(username, password):
             if not login_json.get('success'):
                 return None, None
 
-            dashboard_url = 'https://onetv.cmsi.site/dashboard'
+            dashboard_url = 'https://versatplay.cmzi.top/dashboard'
             dashboard_headers = {
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                 'referer': 'https://one.cmsi.site/',
