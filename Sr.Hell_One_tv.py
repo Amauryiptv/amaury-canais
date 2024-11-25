@@ -60,7 +60,7 @@ def center_text(text, width):
     return "\n".join(line.center(width) for line in text.splitlines())
 
 def login_and_get_dashboard(username, password):
-    login_url = 'https://one.cmsz.site/sys/api.php'
+    login_url = 'https://one.cmsi.site/sys/api.php'
     login_headers = {
         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'
