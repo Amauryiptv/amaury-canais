@@ -79,10 +79,10 @@ def login_and_get_dashboard(username, password):
             if not login_json.get('success'):
                 return None, None
 
-            dashboard_url = 'https://one.cmsz.site/dashboard'
+            dashboard_url = 'https://one.cmsi.site/dashboard'
             dashboard_headers = {
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-                'referer': 'https://one.cmsz.site/',
+                'referer': 'https://one.cmsi.site/',
                 'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
                 'upgrade-insecure-requests': '1'
             }
