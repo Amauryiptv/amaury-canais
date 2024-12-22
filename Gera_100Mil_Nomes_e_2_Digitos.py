@@ -19,7 +19,7 @@ usuarios_senhas = gerar_usuarios_e_senhas(100000)
 print("Gerando Arquivo.")
 
 # Salva em um arquivo
-with open("/sdcard/combo/usuarios_senhas2.txt", "w") as f:
+with open("/sdcard/Hits/Combo100K(nomes).txt", "w") as f:
     for usuario_senha in usuarios_senhas:
         f.write(usuario_senha + "\n")
 
