@@ -8,7 +8,7 @@ def gerar_usuarios_e_senhas(qtd):
 
     for _ in range(qtd):
         nome = fake.first_name().lower()  # Nome em minúsculas
-        digito = str(random.randint(0, 99)).zfill(2)  # Gera um número de dois dígitos
+        digito = str(random.randint(0, 9)).zfill(1)  # Gera um número de dois dígitos
         usuario = f"{nome}{digito}"
         senha = usuario  # Senha igual ao usuário
         usuarios_senhas.append(f"{usuario}:{senha}")
