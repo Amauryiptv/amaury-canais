@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Master IPTV</title>
+  <style>
+    body { background: #111; color: #fff; font-family: Arial; text-align: center; padding: 20px; }
+    .box { background: #222; padding: 20px; border-radius: 10px; display: inline-block; margin-top: 30px; }
+    input { padding: 10px; margin: 5px; width: 80%; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .link-box { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Master IPTV - Gerador de Links M3U</h1>
+  <div class="box">
+    <input type="text" id="usuario" placeholder="Usuário"><br>
+    <input type="text" id="senha" placeholder="Senha"><br>
+    <button onclick="gerar()">Gerar Link</button>
+    <div class="link-box" id="resultado"></div>
+  </div>
+  <script>
+    function gerar() {
+      const user = document.getElementById("usuario").value;
+      const pass = document.getElementById("senha").value;
+      if (user && pass) {
+        const link = `http://kingtv.space/get.php?username=${user}&password=${pass}&type=m3u_plus&output=ts`;
+        document.getElementById("resultado").innerHTML = `
+          <p>Link gerado:</p>
+          <input value="${link}" style="width:90%;" readonly>
+        `;
+      } else {
+        alert("Preencha os campos!");
+      }
+    }
+  </script>
+</body>
+</html>
