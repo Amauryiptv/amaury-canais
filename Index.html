@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Master IPTV</title>
+  <style>
+    body { font-family: Arial; background: #111; color: #fff; text-align: center; padding: 20px; }
+    input, button { padding: 10px; margin: 5px; }
+    .login-box { margin-top: 50px; }
+  </style>
+</head>
+<body>
+  <h1>Master IPTV</h1>
+  <div class="login-box">
+    <input type="text" placeholder="Usuário" id="user"><br>
+    <input type="password" placeholder="Senha" id="pass"><br>
+    <button onclick="login()">Entrar</button>
+  </div>
+  <script>
+    function login() {
+      const u = document.getElementById('user').value;
+      const p = document.getElementById('pass').value;
+      if (u === 'masteriptv' && p === 'master2025') {
+        window.location.href = 'painel.html';
+      } else {
+        alert('Login incorreto');
+      }
+    }
+  </script>
+</body>
+</html>
