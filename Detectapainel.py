@@ -3,13 +3,22 @@ import requests
 import hashlib
 from datetime import datetime
 
-# Entrada do link (URL do painel IPTV)
-url = input("Cole aqui o link do painel IPTV (ex: http://seuservidor.com:porta/panel.php): ").strip()
+# Link padrão que você pode alterar aqui:
+link_padrao = "http://daxoi.online:80/get.php?username=Renataquarto&password=353620&type=m3u_plus"
+
+print("=== Teste Painel IPTV ===")
+print("1 - Usar link padrão")
+print("2 - Digitar outro link")
+escolha = input("Escolha opção (1 ou 2): ").strip()
+
+if escolha == "1":
+    url = link_padrao
+else:
+    url = input("Cole aqui o link do painel IPTV: ").strip()
 
 pasta_logs = "/storage/emulated/0/Download/Hits/painel_logs"
 arquivo_hash = os.path.join(pasta_logs, "hash_anterior.txt")
 
-# Cria a pasta se não existir
 os.makedirs(pasta_logs, exist_ok=True)
 
 try:
