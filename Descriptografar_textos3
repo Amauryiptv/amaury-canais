@@ -1,0 +1,47 @@
+import base64
+import os
+
+print("=== Criptografia e Descriptografia de Arquivos ===")
+print("1 - Criptografar arquivo")
+print("2 - Descriptografar arquivo")
+
+opcao = input("Escolha uma opção (1 ou 2): ")
+
+# Função para criptografar
+def criptografar(caminho):
+    if not os.path.exists(caminho):
+        print("Arquivo não encontrado:", caminho)
+        return
+    with open(caminho, "rb") as f:
+        conteudo = f.read()
+    criptografado = base64.b64encode(conteudo)
+    novo_arquivo = os.path.join(os.path.dirname(caminho), "criptografado.txt")
+    with open(novo_arquivo, "wb") as f:
+        f.write(criptografado)
+    print(f"✅ Arquivo criptografado criado: {novo_arquivo}")
+
+# Função para descriptografar
+def descriptografar(caminho):
+    if not os.path.exists(caminho):
+        print("Arquivo não encontrado:", caminho)
+        return
+    with open(caminho, "rb") as f:
+        conteudo = f.read()
+    try:
+        descriptografado = base64.b64decode(conteudo)
+        novo_arquivo = os.path.join(os.path.dirname(caminho), "descriptografado.txt")
+        with open(novo_arquivo, "wb") as f:
+            f.write(descriptografado)
+        print(f"✅ Arquivo descriptografado criado: {novo_arquivo}")
+    except Exception as e:
+        print("❌ Erro ao tentar descriptografar:", e)
+
+# Execução conforme escolha
+if opcao == "1":
+    caminho = input("Digite o caminho completo do arquivo a criptografar: ")
+    criptografar(caminho)
+elif opcao == "2":
+    caminho = input("Digite o caminho completo do arquivo criptografado: ")
+    descriptografar(caminho)
+else:
+    print("Opção inválida!")
