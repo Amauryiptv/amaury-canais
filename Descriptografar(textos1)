@@ -1,0 +1,233 @@
+# -*- coding: utf-8 -*-
+
+import base64
+import urllib.parse
+import string
+import re
+
+
+def texto_legivel(texto):
+    if not texto:
+        return False
+
+    total = sum(c in string.printable or c in "\n\r\t" for c in texto)
+
+    return total / len(texto) > 0.85
+
+
+def base64_decode(texto):
+    try:
+        texto = texto.strip()
+
+        if not re.fullmatch(r"[A-Za-z0-9+/=_-]+", texto):
+            return None
+
+        texto += "=" * (-len(texto) % 4)
+
+        dados = base64.b64decode(texto, validate=True)
+        resultado = dados.decode("utf-8")
+
+        if texto_legivel(resultado):
+            return resultado
+
+    except Exception:
+        return None
+
+    return None
+
+
+def hexadecimal(texto):
+    try:
+        texto = texto.strip()
+
+        if len(texto) % 2 != 0:
+            return None
+
+        if not re.fullmatch(r"[0-9a-fA-F]+", texto):
+            return None
+
+        resultado = bytes.fromhex(texto).decode("utf-8")
+
+        if texto_legivel(resultado):
+            return resultado
+
+    except Exception:
+        return None
+
+    return None
+
+
+def url_decode(texto):
+    try:
+        resultado = urllib.parse.unquote(texto)
+
+        if resultado != texto:
+            return resultado
+
+    except Exception:
+        pass
+
+    return None
+
+
+def cesar(texto, deslocamento):
+
+    resultado = ""
+
+    for c in texto:
+
+        if c.isalpha():
+
+            inicio = ord("A") if c.isupper() else ord("a")
+
+            resultado += chr(
+                (ord(c) - inicio - deslocamento) % 26 + inicio
+            )
+
+        else:
+
+            resultado += c
+
+    return resultado
+
+
+def procurar_cesar(texto):
+
+    palavras = [
+        " de ",
+        " que ",
+        " para ",
+        " com ",
+        " uma ",
+        " um ",
+        " não ",
+        " eu ",
+        " você ",
+        " texto ",
+        " senha "
+    ]
+
+    melhores = []
+
+    for deslocamento in range(1, 26):
+
+        resultado = cesar(texto, deslocamento)
+
+        pontos = 0
+
+        for palavra in palavras:
+
+            if palavra in resultado.lower():
+                pontos += 1
+
+        if pontos:
+
+            melhores.append(
+                (pontos, deslocamento, resultado)
+            )
+
+    if melhores:
+
+        melhores.sort(reverse=True)
+
+        return melhores[0]
+
+    return None
+
+
+def analisar(texto):
+
+    print("\n")
+    print("=" * 45)
+    print(" ANALISANDO...")
+    print("=" * 45)
+
+    # URL
+    resultado = url_decode(texto)
+
+    if resultado:
+
+        print("\n[+] Tipo: URL Encoding")
+        print("[+] Resultado:")
+        print(resultado)
+
+        return
+
+    # Base64
+    resultado = base64_decode(texto)
+
+    if resultado:
+
+        print("\n[+] Tipo: Base64")
+        print("[+] Resultado:")
+        print(resultado)
+
+        return
+
+    # HEX
+    resultado = hexadecimal(texto)
+
+    if resultado:
+
+        print("\n[+] Tipo: HEX")
+        print("[+] Resultado:")
+        print(resultado)
+
+        return
+
+    # César
+    resultado = procurar_cesar(texto)
+
+    if resultado:
+
+        pontos, deslocamento, resultado_texto = resultado
+
+        print("\n[+] Possível cifra de César")
+        print("[+] Deslocamento:", deslocamento)
+        print("[+] Resultado:")
+        print(resultado_texto)
+
+        return
+
+    print("\n[-] Não consegui identificar automaticamente.")
+
+    print("\nPode ser:")
+    print("AES")
+    print("RSA")
+    print("Fernet")
+    print("Outra criptografia")
+    print("Ou texto codificado de outra forma.")
+
+    print("\nCriptografias como AES/RSA normalmente")
+    print("precisam da chave correta.")
+
+
+def main():
+
+    print("=" * 45)
+    print("   DESCRIPTOGRAFADOR AUTOMÁTICO")
+    print("        QPYTHON 3X")
+    print("=" * 45)
+
+    while True:
+
+        print("\nCole o texto abaixo.")
+        print("Digite SAIR para fechar.")
+
+        texto = input("\nTexto: ")
+
+        if texto.lower().strip() == "sair":
+            break
+
+        if not texto.strip():
+
+            print("Digite algum texto.")
+
+            continue
+
+        analisar(texto)
+
+
+if __name__ == "__main__":
+
+    main()
