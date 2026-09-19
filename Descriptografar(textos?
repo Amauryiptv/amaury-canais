@@ -1,0 +1,214 @@
+# script.py
+import base64
+import binascii
+import urllib.parse
+import string
+import json
+import re
+
+
+def parece_texto_legivel(texto):
+    if not texto:
+        return False
+
+    caracteres_imprimiveis = sum(c in string.printable for c in texto)
+    return caracteres_imprimiveis / len(texto) > 0.85
+
+
+def tentar_base64(texto):
+    try:
+        texto = texto.strip()
+
+        # Base64 normalmente tem tamanho múltiplo de 4
+        if not re.fullmatch(r"[A-Za-z0-9+/=_-]+", texto):
+            return None
+
+        padding = "=" * (-len(texto) % 4)
+
+        # Tenta Base64 normal
+        dados = base64.b64decode(texto + padding, validate=True)
+
+        resultado = dados.decode("utf-8")
+
+        if parece_texto_legivel(resultado):
+            return resultado
+
+    except Exception:
+        pass
+
+    return None
+
+
+def tentar_hex(texto):
+    try:
+        texto = texto.strip()
+
+        if len(texto) % 2 != 0:
+            return None
+
+        if not re.fullmatch(r"[0-9a-fA-F]+", texto):
+            return None
+
+        resultado = bytes.fromhex(texto).decode("utf-8")
+
+        if parece_texto_legivel(resultado):
+            return resultado
+
+    except Exception:
+        pass
+
+    return None
+
+
+def tentar_url(texto):
+    try:
+        resultado = urllib.parse.unquote(texto)
+
+        if resultado != texto:
+            return resultado
+    except Exception:
+        pass
+
+    return None
+
+
+def cifra_cesar(texto, deslocamento):
+    resultado = ""
+
+    for caractere in texto:
+        if caractere.isalpha():
+            inicio = ord("A") if caractere.isupper() else ord("a")
+            resultado += chr(
+                (ord(caractere) - inicio - deslocamento) % 26 + inicio
+            )
+        else:
+            resultado += caractere
+
+    return resultado
+
+
+def tentar_cesar(texto):
+    resultados = []
+
+    for deslocamento in range(1, 26):
+        resultado = cifra_cesar(texto, deslocamento)
+
+        # Palavras comuns para tentar identificar português
+        palavras = [
+            " de ", " que ", " para ", " com ",
+            " uma ", " um ", " não ", " eu ",
+            " você ", " texto ", " senha "
+        ]
+
+        pontos = sum(
+            1 for palavra in palavras
+            if palavra.lower() in resultado.lower()
+        )
+
+        if pontos >= 1:
+            resultados.append((pontos, deslocamento, resultado))
+
+    if resultados:
+        resultados.sort(reverse=True)
+        _, deslocamento, resultado = resultados[0]
+
+        return deslocamento, resultado
+
+    return None
+
+
+def analisar(texto):
+    print("\n" + "=" * 50)
+    print("ANÁLISE DO TEXTO")
+    print("=" * 50)
+
+    # URL
+    resultado = tentar_url(texto)
+    if resultado:
+        print("\n[✓] Possível URL Encoding")
+        print("[✓] Resultado:")
+        print(resultado)
+        return
+
+    # Base64
+    resultado = tentar_base64(texto)
+    if resultado:
+        print("\n[✓] Possível Base64")
+        print("[✓] Resultado:")
+        print(resultado)
+        return
+
+    # Hex
+    resultado = tentar_hex(texto)
+    if resultado:
+        print("\n[✓] Possível hexadecimal")
+        print("[✓] Resultado:")
+        print(resultado)
+        return
+
+    # César
+    resultado = tentar_cesar(texto)
+    if resultado:
+        deslocamento, texto_decodificado = resultado
+
+        print("\n[✓] Possível cifra de César")
+        print(f"[✓] Deslocamento encontrado: {deslocamento}")
+        print("[✓] Resultado:")
+        print(texto_decodificado)
+        return
+
+    # JWT
+    partes = texto.split(".")
+    if len(partes) == 3:
+        try:
+            cabecalho = base64.urlsafe_b64decode(
+                partes[0] + "=" * (-len(partes[0]) % 4)
+            )
+
+            dados = json.loads(cabecalho.decode())
+
+            print("\n[✓] Parece ser um JWT")
+            print("[✓] Cabeçalho:")
+            print(json.dumps(dados, indent=4, ensure_ascii=False))
+            print("\n[!] O conteúdo pode ser lido, mas a assinatura não pode")
+            print("    ser validada/modificada sem a chave apropriada.")
+            return
+
+        except Exception:
+            pass
+
+    print("\n[?] Não foi possível identificar o formato.")
+    print("\nPossibilidades:")
+    print("- AES")
+    print("- RSA")
+    print("- Fernet")
+    print("- Outra criptografia")
+    print("- Texto apenas codificado de outra maneira")
+    print("\nSe for criptografia com chave, será necessário")
+    print("informar a chave/senha e o algoritmo utilizado.")
+
+
+def main():
+    print("=" * 50)
+    print("     DESCRIPTOGRAFADOR / DECODIFICADOR")
+    print("=" * 50)
+
+    while True:
+        print("\nDigite o texto para analisar.")
+        print("Digite 'sair' para fechar.")
+
+        texto = input("\n> ")
+
+        if texto.lower() == "sair":
+            print("Encerrando...")
+            break
+
+        if not texto.strip():
+            print("Digite algum texto.")
+            continue
+
+        analisar(texto)
+
+
+if __name__ == "__main__":
+    main()
