@@ -1,0 +1,16 @@
+from cryptography.fernet import Fernet
+
+# Geração de uma chave (você pode salvar essa chave para reutilizar)
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
+# Texto original
+texto_original = "Este é um texto secreto!"
+
+# Criptografando o texto
+texto_criptografado = cipher_suite.encrypt(texto_original.encode())
+print("Texto criptografado:", texto_criptografado)
+
+# Descriptografando o texto
+texto_descriptografado = cipher_suite.decrypt(texto_criptografado).decode()
+print("Texto descriptografado:", texto_descriptografado)
