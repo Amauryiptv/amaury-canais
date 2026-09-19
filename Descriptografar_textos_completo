@@ -1,0 +1,47 @@
+import base64
+import binascii
+import os
+
+print("=== Identificador e Descriptografador Universal ===")
+
+caminho = input("Digite o caminho completo do arquivo (ex: /storage/emulated/0/qpython/scripts3/save.txt): ")
+
+if not os.path.exists(caminho):
+    print("❌ Arquivo não encontrado:", caminho)
+else:
+    try:
+        # Lê o conteúdo do arquivo
+        with open(caminho, "r") as f:
+            conteudo = f.read().strip()
+
+        # Remove espaços e quebras de linha
+        conteudo_limpo = conteudo.replace(" ", "").replace("\n", "")
+
+        # Detecta o tipo de conteúdo
+        tipo = None
+        if all(c in "0123456789ABCDEFabcdef" for c in conteudo_limpo):
+            tipo = "hexadecimal"
+        elif all(c in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" for c in conteudo_limpo):
+            tipo = "base64"
+        else:
+            tipo = "texto"
+
+        print(f"🔍 Tipo detectado: {tipo}")
+
+        # Processa conforme o tipo
+        if tipo == "hexadecimal":
+            dados = bytes.fromhex(conteudo_limpo)
+        elif tipo == "base64":
+            dados = base64.b64decode(conteudo_limpo)
+        else:
+            dados = conteudo.encode("utf-8")
+
+        # Cria arquivo de saída
+        novo_arquivo = os.path.join(os.path.dirname(caminho), "descriptografado.bin")
+        with open(novo_arquivo, "wb") as f:
+            f.write(dados)
+
+        print(f"✅ Arquivo descriptografado criado com sucesso: {novo_arquivo}")
+
+    except Exception as e:
+        print("❌ Erro ao processar o arquivo:", e)
