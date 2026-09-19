@@ -1,0 +1,18 @@
+import base64
+
+# Lê o arquivo com o texto criptografado (codificado em base64)
+with open("save.txt", "rb") as f:
+    conteudo = f.read()
+
+try:
+    # Tenta decodificar o texto
+    texto_descriptografado = base64.b64decode(conteudo).decode("utf-8")
+
+    # Cria novo arquivo com o texto descriptografado
+    with open("descriptografado.txt", "w", encoding="utf-8") as f:
+        f.write(texto_descriptografado)
+
+    print("Arquivo 'descriptografado.txt' criado com sucesso!")
+
+except Exception as e:
+    print("Erro ao tentar descriptografar:", e)
