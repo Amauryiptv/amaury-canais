@@ -1,0 +1,23 @@
+from cryptography.fernet import Fernet
+
+# Chave usada para criptografia (tem que ser a mesma que gerou o texto)
+# Substitua pela sua chave real
+key = b'k0hYQkYwYkVhQkZkQkZkQkZkQkZkQkZkQkZkQkZkQkY='
+cipher_suite = Fernet(key)
+
+# Lê o arquivo com texto criptografado
+with open("save.txt", "rb") as f:
+    texto_criptografado = f.read()
+
+try:
+    # Tenta descriptografar
+    texto_descriptografado = cipher_suite.decrypt(texto_criptografado).decode()
+
+    # Cria novo arquivo com texto descriptografado
+    with open("descriptografado.txt", "w", encoding="utf-8") as f:
+        f.write(texto_descriptografado)
+
+    print("Arquivo 'descriptografado.txt' criado com sucesso!")
+
+except Exception as e:
+    print("Erro ao descriptografar:", e)
